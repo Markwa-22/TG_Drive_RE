@@ -55,8 +55,8 @@
 **Вручную:**
 
 ```bash
-git clone https://github.com/<ваш-аккаунт>/<ваш-форк>.git
-cd <ваш-форк>
+git clone https://github.com/Markwa-22/TG_Drive_RE.git
+cd TG_Drive_RE
 python -m venv .venv                                  # необязательно, но удобно
 .venv\Scripts\python -m pip install -r requirements.txt
 ```
