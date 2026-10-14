@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Окно входа (login.html).
+   Автономная страница: тема берётся из системной (prefers-color-scheme),
+   разметка и её ID не менялись.
+   ========================================================================== */
+:root {
+	color-scheme: light;
+
+	--font-ui: 'Inter', -apple-system, 'Segoe UI', system-ui, sans-serif;
+
+	--bg: #f5f6f8;
+	--surface: #ffffff;
+	--surface-2: #f1f2f5;
+	--hover: #eef0f4;
+
+	--text-1: #14161a;
+	--text-2: #5b6472;
+	--text-3: #8b94a3;
+
+	--border: #e4e7ed;
+	--border-strong: #d2d7e0;
+
+	--accent: #4f5bd5;
+	--accent-hover: #3f4bc4;
+	--accent-soft: #e6e8fb;
+
+	--shadow-2: 0 16px 44px rgba(16, 24, 40, .18);
+
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+
+		--bg: #0d0f13;
+		--surface: #14171c;
+		--surface-2: #1b1f25;
+		--hover: #1e232a;
+
+		--text-1: #eef1f6;
+		--text-2: #a8b1bf;
+		--text-3: #778090;
+
+		--border: #222831;
+		--border-strong: #333c48;
+
+		--accent: #5e6ad2;
+		--accent-hover: #7b86ea;
+		--accent-soft: #232a44;
+
+		--shadow-2: 0 18px 46px rgba(0, 0, 0, .6);
+	}
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--bg);
+	color: var(--text-1);
+	font-family: var(--font-ui);
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Ссылки «Сайт» / «Видео Инструкции» */
+.help {
+	position: fixed;
+	top: 18px;
+	padding: 7px 12px;
+	border-radius: var(--radius-sm);
+	color: var(--text-2);
+	font-size: 13.5px;
+	text-decoration: none;
+	transition: background .12s, color .12s;
+}
+#help1 { right: 108px; }
+#help2 { right: 18px; }
+.help:hover { background: var(--hover); color: var(--text-1); }
+
+/* Карточка входа */
+.box {
+	width: 340px;
+	padding: 32px 28px 26px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-2);
+	text-align: center;
+}
+.box h1 {
+	margin: 0 0 22px;
+	font-size: 18px;
+	font-weight: 600;
+}
+.box input[type="text"] {
+	display: block;
+	width: 100%;
+	margin: 0 0 12px;
+	padding: 11px 14px;
+	background: var(--surface-2);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	color: var(--text-1);
+	font-size: 14px;
+	text-align: center;
+	outline: none;
+	transition: border-color .15s, box-shadow .15s;
+}
+.box input[type="text"]:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.box input[type="text"]::placeholder { color: var(--text-3); }
+
+/* Кнопка «Войти» (#submitbutton.can_submit) */
+#submitbutton,
+.can_submit {
+	display: block;
+	width: 100%;
+	margin: 10px 0 0;
+	padding: 12px 16px;
+	background: var(--accent);
+	border: 1px solid transparent;
+	border-radius: var(--radius-md);
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background .15s, box-shadow .15s;
+}
+#submitbutton:hover,
+.can_submit:hover { background: var(--accent-hover); }
+#submitbutton:focus-visible,
+.can_submit:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* Переключатель языка */
+#change_lang {
+	position: fixed;
+	left: 18px;
+	bottom: 18px;
+	padding: 8px 16px;
+	background: var(--surface);
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-md);
+	color: var(--text-1);
+	font-size: 13.5px;
+	cursor: pointer;
+	transition: background .15s;
+}
+#change_lang:hover { background: var(--hover); }
+
+#enter { margin-bottom: 20px; }

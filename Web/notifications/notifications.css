@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Уведомления (всплывающие сообщения).
+   Структуру и классы создаёт notifications.js — классы сохранены:
+   .Message / .Message--orange|red|green / .Message-icon / .Message-body /
+   .Message-button / .Message-close / .is-hidden / .hide
+   Цвета берутся из токенов main.css (+ dark.css).
+   ========================================================================== */
+@import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+.Message {
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	width: min(420px, 86vw);
+	margin: 0;
+	background: var(--surface);
+	color: var(--text-1);
+	border: 1px solid var(--border-strong);
+	border-left: 3px solid var(--accent);
+	border-radius: var(--radius-md, 10px);
+	box-shadow: var(--shadow-2);
+	overflow: hidden;
+	transition: all .35s ease;
+}
+.Message.is-hidden {
+	opacity: 0;
+	height: 0;
+	font-size: 0;
+	padding: 0;
+	margin: 0;
+	border-width: 0;
+}
+.Message.is-hidden .Message-body { padding: 0; display: none; }
+.Message.is-hidden .Message-icon { display: none; }
+.Message.hide { display: none; }
+
+.Message--orange { border-left-color: #f59e0b; }
+.Message--red { border-left-color: var(--danger); }
+.Message--green { border-left-color: var(--success); }
+
+.Message-icon {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
+	width: 46px;
+	background: var(--surface-2);
+	color: var(--text-2);
+	font-size: 16px;
+}
+.Message--orange .Message-icon { color: #f59e0b; }
+.Message--red .Message-icon { color: var(--danger); }
+.Message--green .Message-icon { color: var(--success); }
+
+.Message-body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 12px 34px 12px 14px;
+	font-size: 13.5px;
+}
+.Message-body > p { margin: 0; line-height: 1.4; }
+
+.Message-button {
+	align-self: flex-start;
+	padding: 6px 12px;
+	background: var(--surface-2);
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-sm, 6px);
+	color: var(--text-1);
+	font-size: 13px;
+	cursor: pointer;
+	transition: background .15s;
+}
+.Message-button:hover { background: var(--hover); }
+.Message-button:active { background: var(--hover-strong); }
+
+.Message-close {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 26px;
+	height: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: 0;
+	border-radius: var(--radius-sm, 6px);
+	color: var(--text-3);
+	font-size: 14px;
+	opacity: .6;
+	cursor: pointer;
+	transition: .15s;
+}
+.Message:hover .Message-close { opacity: 1; }
+.Message-close:hover { background: var(--hover); color: var(--danger); }

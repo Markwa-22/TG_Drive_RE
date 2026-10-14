@@ -1,0 +1,10 @@
+{
+  "lang": "RU",
+  "theme": "dark",
+  "show_preview": true,
+  "preview_only_images": false,
+  "updated_check_on_load": true,
+  "sort_by": "by_alphabet",
+  "premium_mode": "auto",
+  "premium_detected": false
+}

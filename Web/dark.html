@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Telegram Cloud</title>
+	<link rel="shortcut icon" href="images/TelegramCloud.png" type="image/png">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/light.css" id="theme-link">
+	<script type="text/javascript" src="/eel.js"></script>
+	<script type="text/javascript" src="languages.json"></script>
+	<script type="text/javascript" src="scripts/main.js"></script>
+	<script src="notifications/notifications.js"></script>
+	<link rel="stylesheet" href="styles/switchers.css">
+	<link rel="stylesheet" type="text/css" href="notifications/notifications.css">
+</head>
+<body onload="main();" onkeyup="escape(event); shift_up(event); up_or_down_key(event);" onkeydown="shift_down(event);">
+
+<div id="notifications">
+
+</div>
+
+<!-- ===================== КАРКАС: шапка / сайдбар / содержимое / статус ===================== -->
+<div class="app-shell" id="appShell">
+
+	<header class="app-header">
+		<div class="app-brand" onclick="gotopath('/')" title="Telegram Cloud">
+			<img class="app-logo" src="images/TelegramCloud.png" alt="">
+			<span class="app-title">Telegram Cloud</span>
+		</div>
+
+		<!-- Поиск: открывает модальное окно #search (search_show) -->
+		<button type="button" id="search_but" onclick="search_show();" title="Поиск">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+				<circle cx="11" cy="11" r="7"></circle>
+				<path d="M20 20l-3.6-3.6"></path>
+			</svg>
+			<span id="search_hint">Поиск файлов и папок…</span>
+		</button>
+
+		<div class="app-header-actions">
+			<div class="ui-icon-btn" id="dark_mode" title="Выключить свет" onclick="change_theme();">
+				<img id="dark_mode_img" src="images/dark_light.png" alt="">
+			</div>
+
+			<div class="ui-icon-btn" id="settins_but" title="Настройки" onclick="show_settings_category('general'); show_settings();">
+				<img src="images/settings.png" alt="">
+			</div>
+
+			<div class="ui-icon-btn" id="more_button" title="Больше" onclick="show_more();">
+				<img id="create_img" src="images/add.png" alt="">
+			</div>
+		</div>
+
+		<!-- Выпадающее меню «Больше». Анимацию (marginTop/opacity) делает main.js -->
+		<div id="More">
+			<div id="more_block">
+				<div class="more_block_element">
+					<div class="flex_elem" id="create" title="Создать папку" onclick="new_folder();">
+						<img id="elem1_img" src="images/folderadd.png" alt="">
+						<span id="create_label">Создать папку</span>
+					</div>
+				</div>
+				<form id="new_folder" method="post" onsubmit="new_folder('create');return false;">
+					<input id="name" placeholder="Создать папку" required>
+					<input id="submitbutton" type="submit" value="ОК">
+				</form>
+
+				<div class="more_block_element">
+					<div class="flex_elem" id="clear" title="Удалить пустые папки" onclick="delete_empty_folders();">
+						<img src="images/paintbrush.png" alt="">
+						<span id="clear_label">Удалить пустые папки</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Список корневых папок (заполняет build_sidebar() в scripts/main.js) -->
+	<aside class="app-sidebar" id="appSidebar">
+		<div class="sidebar-title" id="sidebar_title">Библиотека</div>
+		<div id="sidebarFolders"></div>
+		<div class="sidebar-resizer" id="sidebarResizer" title="Потяните, чтобы изменить ширину. Двойной клик — сброс."></div>
+	</aside>
+
+	<div id="background" onclick="hide_details(); hide_sort_menu();hide_updates_menu();hide_search(); clear_select();">
+
+		<div id="background_disabled">
+
+			<div id="head">
+				<div id="Path">
+					<a class="path_link" style="padding: 4px;" onclick="gotopath('/')"></a>
+					<a>/</a>
+				</div>
+				<div id="path_str" style="display: none;">/</div>
+			</div>
+
+			<div id="Uploader">
+				<input type="text" id="path_text" value="" readonly>
+				<button class="Browse" onclick="get_src()" id="upload_button">Загрузить файлы</button>
+				<button class="Browse" onclick="get_folder_src()" id="upload_folder_button">Загрузить папку</button>
+				<button class="Browse" onclick="get_multiple_src()" id="upload_multiple_button">Загрузить несколько</button>
+				<div id="progress_area">
+				</div>
+			</div>
+
+			<div id="FileBrowser">
+
+			</div>
+
+			<div id="move_menu" onclick="move_menu()">
+				<div class="more_block_element">
+					<div class="flex_elem flex_elem2" id="move_button" title="Переместить" onclick="move_menu('show')">
+						<img src="images/send.png" alt="">
+					</div>
+				</div>
+
+				<div class="more_block_element">
+					<div class="flex_elem flex_elem2" id="download_selected_button" title="Скачать выделенные" onclick="download_selected()">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+					</div>
+				</div>
+
+				<form id="new_path" method="post" onsubmit="move_more_files();return false;">
+					<select id="move_picker" onchange="document.getElementById('move_path').value = this.value; this.selectedIndex = -1;"></select>
+					<div class="move_row">
+						<input id="move_path" placeholder="Путь" required>
+						<input id="move_files_disabled" style="width:45px;" value="/Files" disabled>
+						<input type="submit" value="ОК">
+					</div>
+				</form>
+
+				<div class="more_block_element">
+					<div class="flex_elem flex_elem2" id="delete_button" title="Удалить" onclick="delete_selected()">
+						<img src="images/trash2.png" alt="">
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer class="app-statusbar">
+		<div id="memory_used"><a id="memory_used_text">Использовано памяти: </a><a id="memory_used_int">0</a></div>
+		<div id="status_selected"></div>
+	</footer>
+</div>
+
+<!-- ===================== МОДАЛЬНЫЕ ОКНА / МЕНЮ (разметка и ID без изменений) ===================== -->
+
+<div id="settings">
+	<div class="header">
+		<div class="header_name" id="Settings_header" align="center">Настройки</div>
+		<div class="close" onclick="hide_settings();">&times;</div>
+	</div>
+	<div class="left_menu">
+		<div class="left_menu_el" id="general_header" onclick="show_settings_category('general')">🌐Общие</div>
+		<div class="left_menu_el" onclick="show_settings_category('personalization')" id="personalization_header">🎨Внешний вид</div>
+		<div class="left_menu_el" onclick="show_settings_category('other')" id="other_header">🛠Другие</div>
+
+		<div id="settings_extra_block">
+			<div class="more_block_element settings_extra_block_element">
+				<div class="flex_elem" id="check_update" title="Проверить обновления" onclick="alert('Здесь будет ссылка на проверку обновлений');">
+					<img src="images/update.png" alt="">
+				</div>
+			</div>
+
+			<div class="more_block_element settings_extra_block_element">
+				<div class="flex_elem" id="git" title="GitHub" onclick="alert('Тут ссылку на свой GitHub');">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="right_menu">
+		<div id="general">
+			<div class="settings_class_name" align="center" id="general_header2">🌐Общие</div>
+			<hr>
+
+				<div class="settings_element" style="margin-bottom:15px;">
+					<a id="lang_text">Язык:</a>
+					<select id="lang_select" onchange="lang_select_()">
+					  <option value="EN">English</option>
+					  <option value="RU">Русский</option>
+					</select>
+				</div>
+
+				<div class="settings_element" onclick="files_preview_swith();" id="files_preview_title" title="Программа не создает миниатюры файлов, &#013;что позволяет загружать их быстрее">
+					<input id="files_preview" type="checkbox" class="switch">
+					<label id="files_preview_text" for="files_preview">Предпросмотр файлов</label>
+				</div>
+		</div>
+
+
+		<div id="personalization">
+			<div class="settings_class_name" align="center" id="personalization_header2">🎨Внешний вид</div>
+			<hr>
+			<div class="settings_element">
+				<div class="more_block_element settings_extra_block_element">
+					<div class="flex_elem" title="Тёмная тема" id="dark_theme_title1" onclick="change_theme();">
+						<img src="images/light.png" alt="">
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<div id="other">
+			<div class="settings_class_name" align="center" id="other_header2">🛠Другие</div>
+			<hr>
+
+			<div class="settings_element" style="margin-bottom:15px;">
+				<a id="temp_folder_text">Папка для временных файлов:</a>
+				<div class="temp_folder_row">
+					<input type="text" id="temp_folder_path" readonly>
+					<button id="temp_folder_choose" onclick="select_temp_folder()">Выбрать</button>
+					<button id="temp_folder_reset" onclick="clear_temp_folder()">Сброс</button>
+				</div>
+				<small class="temp_folder_hint"><span id="temp_folder_default">По умолчанию: </span><code>C:\Users\...\AppData\Local\Temp</code></small>
+			</div>
+
+			<div id="reset_settings" onclick="reset_settings_default();" title="Восстановить настройки по умолчанию">Сброс</div>
+
+			<div class="settings_element" onclick="updated_check_swith();">
+					<input id="updated_check" type="checkbox" class="switch">
+					<label id="updated_check_text" for="updated_check">Проверка обновлений при запуске</label>
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+	<div id="save_settings" onclick="save_settings();">Сохранить</div>
+	</div>
+</div>
+
+<div id="details">
+	<h1 id="file_name">Text</h1>
+	<img id="img_details" src="" alt="">
+	<h2 id="file_size">0Mb</h2>
+	<button id="download" class="Browse" onclick="download()">Скачать</button>
+
+
+	<div id="progress_area2">
+		<progress max=100 value=0 id="progress_bar2" ></progress>
+		<a id="progress_text2">100%</a>
+		<button id="gotofile_button" onclick="openFile()">Открыть</button>
+	</div>
+
+
+<div class="close" onclick="hide_details();">&times;</div>
+</div>
+
+<div id="search">
+	<h1 id="search_title">Поиск</h1>
+	<input type="text" id="search_input" value="" placeholder="Введите название файла" onkeyup="search_wait();">
+	<div id="Search_Browser">
+		<p id="empty">Пусто</p>
+	</div>
+
+
+<div class="close" onclick="hide_search();">&times;</div>
+</div>
+
+<div id="sort_menu">
+	<div id="sortirovka" align="center">Сортировка:</div>
+	<div class="sort_elem" id="by_alphabet" align="center" onclick="sort_by('by_alphabet')">
+		<a id="by_alphabet_text">По алфавиту</a>
+		<a id="by_alphabet_arrow" class="arrow">&darr;</a></div>
+	<div class="sort_elem" id="by_date" align="center" onclick="sort_by('by_date')">
+		<a id="by_date_text">По дате</a>
+		<a id="by_date_arrow" class="arrow"></a></div>
+	<div style="margin-bottom: 5px;"></div>
+</div>
+
+<div id="updates_menu">
+	<div class="close" onclick="hide_updates_menu();">&times;</div>
+	<div align="center" style="margin-left: auto;">
+		<h2 style="display: inline-block;" id="update_text">Найдена новая версия: </h2><a id="new_version" class="version"></a>
+	</div>
+	<div align="center" style="margin-left: auto;">
+		<h3 style="display: inline-block;" id="curent_ver_text">Текущая версия: </h3><a id="old_version" class="version"></a>
+	</div>
+
+	<div align="center" style="margin-left: auto;">
+		<a href="https://superzombi.github.io/telegram-cloud.docs/#upgrade" target="_blank" style="text-decoration:none;">
+			<button id="video_instruction" align="center" style="margin-left: auto; margin-right: 10px; font-size: 12pt; border-radius: 8px;">Видео инструкция
+			</button>
+		</a>
+
+		<a href="https://github.com/SuperZombi/Telegram_Cloud" target="_blank">
+			<button align="center" style="margin-left: auto; font-size: 12pt; border-radius: 8px;" id="pereiti">Перейти
+			</button>
+		</a>
+
+	</div>
+
+	<h2 id="change_list_text" style="margin-left: 40px; margin-top: 50px;">Список изменений:</h2>
+
+	<div id="change_list" style="font-size: 14pt; margin-left: 10px;">
+	</div>
+
+</div>
+
+</body>
+</html>

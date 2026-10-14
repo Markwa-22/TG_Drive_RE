@@ -1,0 +1,280 @@
+LANGUAGES = {
+	"RU":{
+		"login":{
+			"change_lang":"English",
+			"switch":"Switch to English",
+			"help":"Сайт",
+			"instructions":"Видео Инструкции",
+
+			"title":"Вход",
+			"phone":"Номер телефона",
+			"enter":"Войти"
+		},
+		"main":{
+			"settings":"Настройки",
+			"general_header":"🌐Общие",
+			"personalization_header":"🎨Внешний вид",
+			"other_header":"🛠Другие",
+
+			"reset_settings":"Сбросить настройки?",
+
+			"check_update_title":"Проверить обновления",
+
+			"files_preview":"Предпросмотр файлов",
+
+			"files_preview_description":"Если выключено, программа не будет\nсоздавать миниатюры файлов, что\nпозволяет загружать их быстрее",
+		
+			"dark_theme":"Тёмная тема",
+
+			"reset":"Сброс",
+			"reset_description":"Восстановить настройки по умолчанию",
+			
+			"updated_check":"Проверка обновлений при запуске",
+		
+			"save":"Сохранить",
+
+			/////////////////////////////////////
+
+			"download":"Скачать",
+			"open":"Открыть",
+
+			"search":"Поиск",
+			"search_description":"Введите название файла",
+			"search_empty":"Пусто",
+
+			"sort":"Сортировка:",
+			"by_alphabet":"По алфавиту",
+			"by_date":"По дате",
+
+			////////////////////////////////
+
+			"update":"Найдена новая версия: ",
+			"curent_ver":"Текущая версия: ",
+			"video_inst":"Видео инструкция",
+			"go_to":"Перейти",
+			"change_list":"Список изменений:",
+
+			"more":"Больше",
+			"less":"Скрыть",
+			"create_folder":"Создать папку",
+
+			"search":"Поиск",
+			"delete_emptys":"Удалить пустые папки",
+
+			"dark_theme_on":"Включить свет",
+			"dark_theme_off":"Выключить свет",
+
+			"move":"Переместить",
+			"move_path":"Путь",
+			"move_path_disabled":"/Файлы",
+			"delete":"Удалить",
+
+			"upload":"Загрузить",
+			"cancel_upload":"Отменить",
+
+			/////////////
+
+			"update_available":"Доступно новое обновление!",
+			"no_updates":"Нет обновлений!",
+
+			"back":"< Назад",
+			"sort2":"Сортировка",
+			"rename":"Переименовать",
+
+			"file_already_exist":"Этот файл уже существует в этой папке!",
+			"folder_already_exist":"Эта папка уже существует в этой папке!",
+			"folder_already_exist2":"Эта папка уже существует!",
+			"no":"НЕТ",
+			"show_full_path":"Показать полный путь",
+			"delete_q":"Удалить ",
+
+			"delete_all_emptys":"Вы уверены, что хотите удалить все пустые папки в этой директории?",
+			"download_er":"Ошибка!</br>Не удалось скачать файл ",
+
+			"confirm_delete1":"Вы уверены, что хотите удалить ",
+			"confirm_delete2":" объектов?",
+
+			"folder_exists1":"Папка ",
+			"folder_exists2":" уже существует в этой папке!",
+			"file_exists1":"Файл ",
+			"dont_save":"Не сохранять?",
+
+			"lang_text":"Язык:",
+
+			"memory_used":"Использовано памяти: ",
+
+			"sidebar_title":"Библиотека",
+			"selected":"Выбрано: ",
+			"upload_folder":"Загрузить папку",
+			"upload_multiple":"Загрузить несколько",
+			"download_selected":"Скачать выделенные",
+			"downloaded":"Скачано: ",
+			"download_failed":" · ошибок: ",
+			"deleted":"Удалено: ",
+			"delete_failed":", не удалось: ",
+			"pick_download_dir":"Куда сохранить",
+			"pick_files_first":"Отметьте файлы, которые нужно скачать",
+			"move_picker_title":"Куда переместить?",
+			"move_root":"корень",
+			"badge_folder":"Загруженная папка",
+			"badge_multi":"Многотомный архив",
+			"badge_both":"Многотомный архив загруженной папки",
+			"temp_folder":"Папка для временных файлов:",
+			"temp_folder_choose":"Выбрать",
+			"temp_folder_default":"По умолчанию: "
+		},
+		"python":{
+			"download_cancel":"Загрузка отменена!",
+			"generating_preview":"Создаю изображение для предпросмотра",
+			"file":"Файл ",
+			"already_exist":" уже существует!",
+			"uploaded":" загружен!",
+			"error_1":"Ошибка! Файл '",
+			"error_2":"' не был удален с сервера!",
+
+			"GB":" ГБ",
+			"MB":" МБ",
+			"KB":" КБ",
+			"bites":" байт"
+		}
+	},
+
+	"EN":{
+		"login":{
+			"change_lang":"Русский",
+			"switch":"Переключиться на Русский",
+			"help":"Site",
+			"instructions":"Video Instructions",
+
+			"title":"Authorization",
+			"phone":"Phone number",
+			"enter":"Log in"
+		},
+		"main":{
+			"settings":"Settings",
+			"general_header":"🌐General",
+			"personalization_header":"🎨Personalization",
+			"other_header":"🛠Other",
+
+			"reset_settings":"Do you want to reset settings?",
+
+			"check_update_title":"Check updates",
+
+			"files_preview":"Files preview",
+			"files_preview_description":"If disabled, the program does\nnot create thumbnails of files,\nwhich allows to upload them faster",
+		
+			"dark_theme":"Dark theme",
+
+			"reset":"Reset",
+			"reset_description":"Set default settings",
+			
+			"updated_check":"Check updates with startup",
+		
+			"save":"Save",
+
+			/////////////////////////////////////
+
+			"download":"Download",
+			"open":"Open",
+
+			"search":"Search",
+			"search_description":"Enter file name",
+			"search_empty":"Empty",
+
+			"sort":"Sort by:",
+			"by_alphabet":"Alphabet",
+			"by_date":"Date",
+
+			////////////////////////////////
+
+			"update":"New version is available: ",
+			"curent_ver":"Current version: ",
+			"video_inst":"Video Instruction",
+			"go_to":"Go to GitHub",
+			"change_list":"Change list:",
+
+			"more":"Show more",
+			"less":"Hide",
+			"create_folder":"Create folder",
+
+			"search":"Search",
+			"delete_emptys":"Delete empty folders",
+
+			"dark_theme_on":"Turn on the light",
+			"dark_theme_off":"Turn off the light",
+
+			"move":"Move to",
+			"move_path":"Path",
+			"move_path_disabled":"/Files",
+			"delete":"Delete",
+
+			"upload":"Upload",
+			"cancel_upload":"Cancel",
+
+			/////////////
+
+			"update_available":"New update available!",
+			"no_updates":"No updates!",
+
+			"back":"< Back",
+			"sort2":"Sorting",
+			"rename":"Rename",
+
+			"file_already_exist":"This file already exists in this folder!",
+			"folder_already_exist":"This folder already exists in this folder!",
+			"folder_already_exist2":"This folder already exists!",
+			"no":"NO",
+			"show_full_path":"Show full path",
+			"delete_q":"Delete ",
+
+			"delete_all_emptys":"Are you sure you want to delete all empty folders in this directory?",
+			"download_er":"Error!</br>Failed to download the file ",
+
+			"confirm_delete1":"Are you sure you want to delete ",
+			"confirm_delete2":" objects?",
+
+			"folder_exists1":"The folder ",
+			"folder_exists2":" already exists in this folder!",
+			"file_exists1":"The file ",
+			"dont_save":"Do not save?",
+
+			"lang_text":"Language:",
+
+			"memory_used":"Memory used: ",
+
+			"sidebar_title":"Library",
+			"selected":"Selected: ",
+			"upload_folder":"Upload folder",
+			"upload_multiple":"Upload multiple",
+			"download_selected":"Download selected",
+			"downloaded":"Downloaded: ",
+			"download_failed":" · failed: ",
+			"deleted":"Deleted: ",
+			"delete_failed":", failed: ",
+			"pick_download_dir":"Save to",
+			"pick_files_first":"Select the files you want to download",
+			"move_picker_title":"Move to…",
+			"move_root":"root",
+			"badge_folder":"Uploaded folder",
+			"badge_multi":"Multi-volume archive",
+			"badge_both":"Multi-volume archive of an uploaded folder",
+			"temp_folder":"Temporary files folder:",
+			"temp_folder_choose":"Choose",
+			"temp_folder_default":"Default: "
+		},
+		"python":{
+			"download_cancel":"Download canceled!",
+			"generating_preview":"Creating thumbnails for preview",
+			"file":"The file ",
+			"already_exist":" already exists!",
+			"uploaded":" uploaded!",
+			"error_1":"Error! The file '",
+			"error_2":"' was not deleted from the server!",
+
+			"GB":" GB",
+			"MB":" MB",
+			"KB":" KB",
+			"bites":" bites"
+		}
+	}
+}
