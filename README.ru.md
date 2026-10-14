@@ -41,30 +41,40 @@
 |---|---|
 | ОС | Windows 10/11 (Linux/macOS в основном работают; BAT-файлы только для Windows) |
 | Python | 3.8 или новее |
-| 7-Zip | нужен для файлов больше лимита Telegram и для упаковки папок |
+| 7-Zip | нужен для файлов больше лимита Telegram и для упаковки папок (`winget install 7zip.7zip` или доверьте это `install.bat`) |
 | Telegram | API ID и API Hash с <https://my.telegram.org> |
 
 ---
 
 ## 🚀 Установка и запуск
 
+**В Windows самое простое** — запустить **`install.bat`** двойным щелчком: он поставит все
+зависимости (по желанию — в изолированную папку `.venv`) и проверит 7-Zip, предложив
+поставить его через `winget install 7zip.7zip`. Дальше запуск — `start.bat`.
+
+**Вручную:**
+
 ```bash
 git clone https://github.com/<ваш-аккаунт>/<ваш-форк>.git
 cd <ваш-форк>
-pip install -r requirements.txt
+python -m venv .venv                                  # необязательно, но удобно
+.venv\Scripts\python -m pip install -r requirements.txt
 ```
 
-Далее в Windows:
+Батники для Windows:
 
 | Файл | Что делает |
 |---|---|
+| `install.bat` | ставит/обновляет зависимости (можно в `.venv`) и проверяет 7-Zip |
 | `start.bat` | обычный запуск |
 | `start_with_check.bat` | сначала проверяет Python, зависимости и 7-Zip |
-| `help.bat` | интерактивное меню (запуск / тест / сброс) |
+| `help.bat` | интерактивное меню (запуск / тест / сброс / установка) |
 | `test_connection.bat` | показывает аккаунт, статус Premium и лимиты загрузки |
 | `reset_settings.bat` | удаляет `config.ini`, `TelegramCloud.session`, `settings.json` |
 
-Либо вручную: `python main.py`.
+Либо вручную: `python main.py`. Любой батник предпочитает `.venv`, если эта папка есть,
+и иначе работает с системным Python — оба варианта совместимы. Папка `.venv` указана в
+`.gitignore` и никогда не публикуется.
 
 ### Первый запуск
 

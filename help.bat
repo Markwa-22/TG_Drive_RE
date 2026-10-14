@@ -15,16 +15,18 @@ echo 2. Test connection to Telegram
 echo 3. Reset settings (if you have problems)
 echo 4. Check system (Python, dependencies, 7-Zip)
 echo 5. Open troubleshooting guide
-echo 6. Exit
+echo 6. Install or update dependencies
+echo 7. Exit
 echo.
-set /p choice="Enter number (1-6): "
+set /p choice="Enter number (1-7): "
 
 if "%choice%"=="1" goto start_app
 if "%choice%"=="2" goto test_connection
 if "%choice%"=="3" goto reset_settings
 if "%choice%"=="4" goto check_system
 if "%choice%"=="5" goto open_troubleshooting
-if "%choice%"=="6" goto exit
+if "%choice%"=="6" goto install_deps
+if "%choice%"=="7" goto exit
 
 echo.
 echo Invalid choice. Try again.
@@ -70,6 +72,14 @@ if exist TROUBLESHOOTING.md (
 )
 echo.
 pause
+goto menu
+
+:install_deps
+cls
+echo.
+echo Installing / updating dependencies...
+echo.
+call install.bat
 goto menu
 
 :exit

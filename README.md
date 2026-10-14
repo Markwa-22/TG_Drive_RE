@@ -40,30 +40,40 @@ redesigned interface and a tidied-up project layout.
 |---|---|
 | OS | Windows 10/11 (Linux/macOS mostly work; BAT files are Windows-only) |
 | Python | 3.8 or newer |
-| 7-Zip | required for files above the Telegram limit and for packing folder uploads |
+| 7-Zip | required for files above the Telegram limit and for packing folder uploads (`winget install 7zip.7zip`, or let `install.bat` do it) |
 | Telegram | API ID + API Hash from <https://my.telegram.org> |
 
 ---
 
 ## 🚀 Install and run
 
+**On Windows, the easy way:** double-click **`install.bat`** — it installs every dependency,
+optionally into an isolated `.venv` folder, and checks 7-Zip (offering
+`winget install 7zip.7zip`). Then start the app with `start.bat`.
+
+**Manually:**
+
 ```bash
 git clone https://github.com/<your-account>/<your-fork>.git
 cd <your-fork>
-pip install -r requirements.txt
+python -m venv .venv                                  # optional but recommended
+.venv\Scripts\python -m pip install -r requirements.txt
 ```
 
-Then, on Windows:
+Windows launchers:
 
 | File | What it does |
 |---|---|
+| `install.bat` | installs / updates dependencies (optionally into `.venv`) and checks 7-Zip |
 | `start.bat` | starts the app |
 | `start_with_check.bat` | checks Python, dependencies and 7-Zip first |
-| `help.bat` | interactive menu (start / test / reset) |
+| `help.bat` | interactive menu (start / test / reset / install) |
 | `test_connection.bat` | prints account info, Premium status and upload limits |
 | `reset_settings.bat` | deletes `config.ini`, `TelegramCloud.session`, `settings.json` |
 
-Or manually: `python main.py`.
+Or manually: `python main.py`. Every launcher prefers `.venv` when that folder exists and
+falls back to the system Python otherwise, so both setups work. `.venv/` is in
+`.gitignore` and is never published.
 
 ### First run
 

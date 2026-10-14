@@ -1,5 +1,10 @@
 @echo off
 title TG Drive RE - Startup with Checks
+cd /d "%~dp0"
+
+REM Use the .venv created by install.bat, otherwise the system Python
+set "PY=python"
+if exist "%~dp0.venv\Scripts\python.exe" set "PY=%~dp0.venv\Scripts\python.exe"
 
 echo.
 echo ============================================================
@@ -10,40 +15,31 @@ echo.
 
 REM Check Python
 echo [1/4] Checking Python...
-python --version >nul 2>&1
+"%PY%" --version >nul 2>&1
 if errorlevel 1 (
     echo [X] Python not found!
-    echo     Install Python 3.8+ from https://www.python.org/
+    echo     Install Python 3.9+ from https://www.python.org/
+    echo     Or run install.bat - it sets everything up automatically.
     pause
     exit /b 1
 ) else (
-    for /f "tokens=2" %%i in ('python --version 2^>^&1') do echo [OK] Python %%i installed
+    for /f "tokens=2" %%i in ('"%PY%" --version 2^>^&1') do echo [OK] Python %%i installed
 )
 
 REM Check dependencies
 echo [2/4] Checking dependencies...
-python -c "import pyrogram, eel, aiofiles" >nul 2>&1
+"%PY%" -c "import pyrogram, eel, aiofiles" >nul 2>&1
+if not errorlevel 1 echo [OK] All dependencies installed
+if errorlevel 1 call install.bat
+REM install.bat may have created .venv - switch to it from now on
+set "PY=python"
+if exist "%~dp0.venv\Scripts\python.exe" set "PY=%~dp0.venv\Scripts\python.exe"
+"%PY%" -c "import pyrogram, eel, aiofiles" >nul 2>&1
 if errorlevel 1 (
-    echo [X] Dependencies not installed!
-    echo.
-    echo Install now? (Y/N)
-    set /p install_deps=
-    if /i "%install_deps%"=="Y" (
-        echo Installing dependencies...
-        pip install -r requirements.txt
-        if errorlevel 1 (
-            echo [X] Installation error!
-            pause
-            exit /b 1
-        )
-        echo [OK] Dependencies installed!
-    ) else (
-        echo Run: pip install -r requirements.txt
-        pause
-        exit /b 1
-    )
-) else (
-    echo [OK] All dependencies installed
+    echo [X] Dependencies still missing!
+    echo     Run install.bat, then start the application again.
+    pause
+    exit /b 1
 )
 
 REM Check 7-Zip
@@ -72,7 +68,7 @@ echo.
 timeout /t 2 >nul
 
 REM Start application
-python main.py
+"%PY%" main.py
 
 if errorlevel 1 (
     echo.
