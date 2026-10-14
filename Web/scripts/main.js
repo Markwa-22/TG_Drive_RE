@@ -1111,13 +1111,27 @@ async function download(){
 showed_sort_menu = false;
 async function show_sort_menu(e){
 	if (!showed_sort_menu){
-		document.getElementById("sort_menu").style.display = "block";
+		const menu = document.getElementById("sort_menu");
+		menu.style.display = "block";
 		await new Promise(resolve => setTimeout(resolve, 0));
-		x = e.clientX
-		y = e.clientY
-		document.getElementById("sort_menu").style.top = y + "px";
-		document.getElementById("sort_menu").style.left = x + "px";
-		document.getElementById("sort_menu").style.transform = "scale(1)"
+		/* Меню открывается в точке нажатия, но кнопка сортировки стоит у правого
+		   края окна, поэтому раньше оно уходило за границу и обрезалось.
+		   Теперь оно прижимается к окну, а если справа не хватает места —
+		   разворачивается влево от точки нажатия. offsetWidth берём до scale(),
+		   поэтому ширина корректная (трансформация на layout не влияет). */
+		const margin = 8;
+		const w = menu.offsetWidth;
+		const h = menu.offsetHeight;
+		let x = e.clientX;
+		const y = e.clientY;
+		const to_left = (x + w + margin > window.innerWidth);
+		if (to_left){ x = x - w; }
+		x = Math.max(margin, Math.min(x, window.innerWidth - w - margin));
+		const top = Math.max(margin, Math.min(y, window.innerHeight - h - margin));
+		menu.style.transformOrigin = to_left ? "right top" : "left top";
+		menu.style.top = top + "px";
+		menu.style.left = x + "px";
+		menu.style.transform = "scale(1)"
 		setTimeout(function() {showed_sort_menu = true;}, 50)
 	}
 }
