@@ -54,8 +54,8 @@ optionally into an isolated `.venv` folder, and checks 7-Zip (offering
 **Manually:**
 
 ```bash
-git clone https://github.com/<your-account>/<your-fork>.git
-cd <your-fork>
+git clone https://github.com/Markwa-22/TG_Drive_RE.git
+cd TG_Drive_RE
 python -m venv .venv                                  # optional but recommended
 .venv\Scripts\python -m pip install -r requirements.txt
 ```
