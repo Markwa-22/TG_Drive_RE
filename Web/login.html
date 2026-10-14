@@ -8,8 +8,7 @@
 	<script type="text/javascript" src="languages.json"></script>
 </head>
 <body>
-<a style="margin-right: 20px;" href="https://my.telegram.org/apps" class="help" id="help1" target="_blank">Help</a>
-<a href="https://superzombi.github.io/telegram-cloud.docs/" class="help" id="help2" target="_blank">Video Instructions</a>
+<a href="https://my.telegram.org/apps" class="help" id="help1" target="_blank">Help</a>
 
 <form name="MyForm" class="box" method="post" onsubmit="main(); return false;">
 	<h1 id="enter">Вход</h1>
@@ -63,7 +62,6 @@
 		document.getElementById("change_lang").innerHTML = LANGUAGES[global_lang].login.change_lang
 		document.getElementById("change_lang").title = LANGUAGES[global_lang].login.switch
 		document.getElementById("help1").innerHTML = LANGUAGES[global_lang].login.help
-		document.getElementById("help2").innerHTML = LANGUAGES[global_lang].login.instructions
 		document.getElementById("enter").innerHTML = LANGUAGES[global_lang].login.title
 		document.getElementById("phone").placeholder = LANGUAGES[global_lang].login.phone
 		document.getElementById("submitbutton").value = LANGUAGES[global_lang].login.enter

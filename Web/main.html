@@ -86,7 +86,7 @@
 		<div class="sidebar-resizer" id="sidebarResizer" title="Потяните, чтобы изменить ширину. Двойной клик — сброс."></div>
 	</aside>
 
-	<div id="background" onclick="hide_details(); hide_sort_menu();hide_updates_menu();hide_search(); clear_select();">
+	<div id="background" onclick="hide_details(); hide_sort_menu(); hide_search(); clear_select();">
 
 		<div id="background_disabled">
 
@@ -163,14 +163,10 @@
 
 		<div id="settings_extra_block">
 			<div class="more_block_element settings_extra_block_element">
-				<div class="flex_elem" id="check_update" title="Проверить обновления" onclick="alert('Здесь будет ссылка на проверку обновлений');">
-					<img src="images/update.png" alt="">
-				</div>
-			</div>
-
-			<div class="more_block_element settings_extra_block_element">
-				<div class="flex_elem" id="git" title="GitHub" onclick="alert('Тут ссылку на свой GitHub');">
+				<div class="flex_elem" id="git" title="GitHub">
+					<a href="https://github.com/Markwa-22" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center;">
 					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -227,12 +223,6 @@
 
 			<div id="reset_settings" onclick="reset_settings_default();" title="Восстановить настройки по умолчанию">Сброс</div>
 
-			<div class="settings_element" onclick="updated_check_swith();">
-					<input id="updated_check" type="checkbox" class="switch">
-					<label id="updated_check_text" for="updated_check">Проверка обновлений при запуске</label>
-			</div>
-
-
 		</div>
 
 
@@ -279,35 +269,6 @@
 		<a id="by_date_text">По дате</a>
 		<a id="by_date_arrow" class="arrow"></a></div>
 	<div style="margin-bottom: 5px;"></div>
-</div>
-
-<div id="updates_menu">
-	<div class="close" onclick="hide_updates_menu();">&times;</div>
-	<div align="center" style="margin-left: auto;">
-		<h2 style="display: inline-block;" id="update_text">Найдена новая версия: </h2><a id="new_version" class="version"></a>
-	</div>
-	<div align="center" style="margin-left: auto;">
-		<h3 style="display: inline-block;" id="curent_ver_text">Текущая версия: </h3><a id="old_version" class="version"></a>
-	</div>
-
-	<div align="center" style="margin-left: auto;">
-		<a href="https://superzombi.github.io/telegram-cloud.docs/#upgrade" target="_blank" style="text-decoration:none;">
-			<button id="video_instruction" align="center" style="margin-left: auto; margin-right: 10px; font-size: 12pt; border-radius: 8px;">Видео инструкция
-			</button>
-		</a>
-
-		<a href="https://github.com/SuperZombi/Telegram_Cloud" target="_blank">
-			<button align="center" style="margin-left: auto; font-size: 12pt; border-radius: 8px;" id="pereiti">Перейти
-			</button>
-		</a>
-
-	</div>
-
-	<h2 id="change_list_text" style="margin-left: 40px; margin-top: 50px;">Список изменений:</h2>
-
-	<div id="change_list" style="font-size: 14pt; margin-left: 10px;">
-	</div>
-
 </div>
 
 </body>

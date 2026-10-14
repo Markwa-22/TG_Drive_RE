@@ -68,10 +68,13 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-/* Ссылки «Сайт» / «Видео Инструкции» */
+/* Ссылка «Сайт». Раньше их было две, и позиции задавались жёсткими смещениями
+   (right: 108px / right: 18px), рассчитанными на длину английских надписей —
+   в русской локализации тексты длиннее, и ссылки наезжали друг на друга. */
 .help {
 	position: fixed;
 	top: 18px;
+	right: 18px;
 	padding: 7px 12px;
 	border-radius: var(--radius-sm);
 	color: var(--text-2);
@@ -79,8 +82,6 @@ body {
 	text-decoration: none;
 	transition: background .12s, color .12s;
 }
-#help1 { right: 108px; }
-#help2 { right: 18px; }
 .help:hover { background: var(--hover); color: var(--text-1); }
 
 /* Карточка входа */
@@ -100,6 +101,10 @@ body {
 }
 .box input[type="text"] {
 	display: block;
+	/* Кнопка по умолчанию считается по border-box, поэтому width:100% у неё
+	   равна ширине содержимого карточки. Полям нужно то же самое, иначе они
+	   шире кнопки на padding+border (30px) и вылезают за край карточки. */
+	box-sizing: border-box;
 	width: 100%;
 	margin: 0 0 12px;
 	padding: 11px 14px;

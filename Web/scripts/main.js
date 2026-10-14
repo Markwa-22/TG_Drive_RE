@@ -36,14 +36,6 @@ async function main(){
 
 	try{init_sidebar_resizer();}catch(e){}
 
-	updated_check_on_load = await eel.get_updated_check_on_load()();
-	if (updated_check_on_load){
-		document.getElementById('updated_check').checked = true;
-		if (await eel.auto_check_update()()){
-			await Warning(LANGUAGES[global_lang].main.update_available, 4000)
-		}
-	}
-	
 	// Load temp folder setting
 	await load_temp_folder();
 }
@@ -135,29 +127,6 @@ async function setup_arrow(){
 		document.getElementById("by_alphabet_arrow").innerHTML = "";
 		document.getElementById("by_date_arrow").innerHTML = "&uarr;";
 	}
-}
-
-showed_updates_menu = false;
-async function check_updates(){
-	document.body.style.cursor = "wait";
-	document.getElementById('check_update').style.cursor = "wait";
-	unswer = await eel.check_updates()();
-	if (unswer['new_updates']){
-		showed_updates_menu = true;
-		document.getElementById("updates_menu").style.display = "block";
-		document.getElementById("new_version").innerHTML = unswer['new_version'];
-		document.getElementById("old_version").innerHTML = unswer['old_version'];
-		document.getElementById("change_list").innerHTML = unswer['change_list'];
-	}
-	else{
-		await Success(LANGUAGES[global_lang].main.no_updates)
-	}
-	document.body.style.cursor = "auto";
-	document.getElementById('check_update').style.cursor = "pointer";
-}
-function hide_updates_menu(){
-	showed_updates_menu = false;
-	document.getElementById("updates_menu").style.display = "none";
 }
 
 function build_progress(elem, id){
@@ -913,9 +882,6 @@ function escape(event){
 		else if (search_showed){
 			hide_search();
 		}
-		else if (showed_updates_menu){
-			hide_updates_menu();
-		}
 		else if (showed_sort_menu){
 			hide_sort_menu();
 		}
@@ -1172,7 +1138,7 @@ async function sort_by(what){
 selected_objs = []
 selected_event = false;
 function select(what, name){
-	if (!detail_showed && !search_showed && !showed_updates_menu && !renaming_event && !renaming_folder && !deleted_event){
+	if (!detail_showed && !search_showed && !renaming_event && !renaming_folder && !deleted_event){
 		selected_event = true;
 		for (i=0;i<selected_objs.length;i++){
 			if ([what,name].join() == selected_objs[i].join()){
@@ -1232,7 +1198,7 @@ shift_pressed = false;
 function shift_down(e){if(e.keyCode==16){shift_pressed = true;}}
 function shift_up(e){if(e.keyCode==16){shift_pressed = false;}}
 async function up_or_down_key(e){
-	if (!detail_showed && !search_showed && !showed_updates_menu && !settings_showed){
+	if (!detail_showed && !search_showed && !settings_showed){
 		if (shift_pressed){
 			if (e.keyCode == 70){
 				if (!show_event){
@@ -1421,11 +1387,6 @@ async function save_settings(){
 			document.getElementById('files_preview').checked = setting_changed["files_preview"]
 			await eel.save_preview_settings(setting_changed["files_preview"])
 		}
-		if (keys[i] == "updated_check_swith"){
-			updated_check_on_load = setting_changed["updated_check_swith"]
-			document.getElementById('updated_check').checked = setting_changed["updated_check_swith"]
-			await eel.save_updated_check_on_load(setting_changed["updated_check_swith"])
-		}
 		if (keys[i] == "lang"){
 			global_lang = setting_changed["lang"]
 			document.getElementById('lang_select').checked = setting_changed["lang"]
@@ -1437,7 +1398,6 @@ async function save_settings(){
 }
 function reset_settings(){
 	document.getElementById('files_preview').checked = show_preview;
-	document.getElementById('updated_check').checked = updated_check_on_load;
 	document.getElementById('lang_select').value = global_lang;
 	setting_changed = {}
 	hide_settings_button()
@@ -1445,7 +1405,7 @@ function reset_settings(){
 async function reset_settings_default(){
 	if (confirm(LANGUAGES[global_lang].main.reset_settings)){
 		setting_changed = {}
-		setting_changed = {"files_preview": true, "updated_check_swith": true}
+		setting_changed = {"files_preview": true}
 		await save_settings()
 	}
 }
@@ -1476,21 +1436,6 @@ function files_preview_swith(){
 	else{
 		show_save_button();
 	}
-}
-
-function updated_check_swith(){
-	setting_changed['updated_check_swith'] = document.getElementById('updated_check').checked;
-	if (setting_changed['updated_check_swith'] == updated_check_on_load){
-		delete setting_changed['updated_check_swith'];
-		setTimeout(function() {
-			if (Object.keys(setting_changed).length == 0){
-				hide_settings_button();
-			}
-		}, 10)
-	}
-	else{
-		show_save_button();
-	}	
 }
 
 function show_settings_category(category){
@@ -1546,8 +1491,6 @@ async function load_lang(){
 	document.getElementById("personalization_header2").innerHTML = LANGUAGES[global_lang].main.personalization_header
 	document.getElementById("other_header2").innerHTML = LANGUAGES[global_lang].main.other_header
 
-	document.getElementById("check_update").title = LANGUAGES[global_lang].main.check_update_title
-	
 	document.getElementById("files_preview_text").innerHTML = LANGUAGES[global_lang].main.files_preview
 	document.getElementById("files_preview_title").title = LANGUAGES[global_lang].main.files_preview_description
 
@@ -1555,8 +1498,6 @@ async function load_lang(){
 
 	document.getElementById("reset_settings").innerHTML = LANGUAGES[global_lang].main.reset
 	document.getElementById("reset_settings").title = LANGUAGES[global_lang].main.reset_description
-
-	document.getElementById("updated_check_text").innerHTML = LANGUAGES[global_lang].main.updated_check
 
 	document.getElementById("save_settings").innerHTML = LANGUAGES[global_lang].main.save
 
@@ -1575,12 +1516,6 @@ async function load_lang(){
 	document.getElementById("by_date_text").innerHTML = LANGUAGES[global_lang].main.by_date
 
 	////////////////
-
-	document.getElementById("update_text").innerHTML = LANGUAGES[global_lang].main.update
-	document.getElementById("curent_ver_text").innerHTML = LANGUAGES[global_lang].main.curent_ver
-	document.getElementById("video_instruction").innerHTML = LANGUAGES[global_lang].main.video_inst
-	document.getElementById("pereiti").innerHTML = LANGUAGES[global_lang].main.go_to
-	document.getElementById("change_list_text").innerHTML = LANGUAGES[global_lang].main.change_list
 
 	document.getElementById("more_button").title = LANGUAGES[global_lang].main.more
 	document.getElementById("create").title = LANGUAGES[global_lang].main.create_folder	

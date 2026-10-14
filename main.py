@@ -28,8 +28,6 @@ from tkinter.filedialog import askopenfilenames, asksaveasfilename, askdirectory
 import time
 import eel
 import os
-from bs4 import BeautifulSoup
-import requests
 import shutil
 from PIL import Image
 import cv2
@@ -49,7 +47,6 @@ phone = ""
 started = False
 previews_show = True
 preview_only_images = False
-updated_check_on_load = True
 global_lang = "RU"
 PATH = []
 current_path = "/"
@@ -218,33 +215,6 @@ def change_lang(lang):
 		file.write(json.dumps(lines, ensure_ascii=False, indent=2))	
 
 @eel.expose
-def get_updated_check_on_load():
-	global updated_check_on_load
-	try:
-		with open('settings.json', 'r', encoding = 'utf-8') as file:
-			lines = json.loads(file.read())
-			updated_check_on_load = lines["updated_check_on_load"]
-			return lines["updated_check_on_load"]
-
-	except:
-		return True
-
-@eel.expose
-def save_updated_check_on_load(val):
-	global updated_check_on_load
-	try:
-		with open('settings.json', 'r', encoding = 'utf-8') as file:
-			lines = json.loads(file.read())
-
-	except FileNotFoundError:
-		lines = {}
-
-	lines["updated_check_on_load"] = val
-	updated_check_on_load = val
-	with open('settings.json', 'w', encoding = 'utf-8') as file:
-		file.write(json.dumps(lines, ensure_ascii=False, indent=2))
-
-@eel.expose
 def show_preview_setting():
 	global previews_show
 	try:
@@ -330,27 +300,6 @@ def get_curent_arrow():
 	except:
 		current_sort = "by_alphabet"
 	return current_sort
-
-@eel.expose()
-def check_updates():
-	if global_lang == "RU":
-		link = 'https://github.com/SuperZombi/Telegram_Cloud'
-	else:
-		link = 'https://github.com/SuperZombi/Telegram_Cloud/blob/main/README_EN.md'
-		
-	response = requests.get(link)
-	soup = BeautifulSoup(response.content, 'html.parser')
-	git_ver = float(soup.select('#user-content-version')[0].find('code').get_text())
-	if __version__ != git_ver:
-		change_list = soup.select('#user-content-change_list')[0]
-		return {'new_updates': True, 'old_version': str(__version__), 'new_version': str(git_ver), 'change_list': str(change_list)}
-	else:
-		return {'new_updates': False}
-
-
-@eel.expose()
-def auto_check_update():
-	return check_updates()['new_updates']
 
 @eel.expose
 def create_config(api_id, api_hash, phone_number):

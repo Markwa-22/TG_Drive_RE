@@ -4,7 +4,6 @@ LANGUAGES = {
 			"change_lang":"English",
 			"switch":"Switch to English",
 			"help":"Сайт",
-			"instructions":"Видео Инструкции",
 
 			"title":"Вход",
 			"phone":"Номер телефона",
@@ -18,7 +17,6 @@ LANGUAGES = {
 
 			"reset_settings":"Сбросить настройки?",
 
-			"check_update_title":"Проверить обновления",
 
 			"files_preview":"Предпросмотр файлов",
 
@@ -29,7 +27,6 @@ LANGUAGES = {
 			"reset":"Сброс",
 			"reset_description":"Восстановить настройки по умолчанию",
 			
-			"updated_check":"Проверка обновлений при запуске",
 		
 			"save":"Сохранить",
 
@@ -48,11 +45,7 @@ LANGUAGES = {
 
 			////////////////////////////////
 
-			"update":"Найдена новая версия: ",
-			"curent_ver":"Текущая версия: ",
-			"video_inst":"Видео инструкция",
 			"go_to":"Перейти",
-			"change_list":"Список изменений:",
 
 			"more":"Больше",
 			"less":"Скрыть",
@@ -74,8 +67,6 @@ LANGUAGES = {
 
 			/////////////
 
-			"update_available":"Доступно новое обновление!",
-			"no_updates":"Нет обновлений!",
 
 			"back":"< Назад",
 			"sort2":"Сортировка",
@@ -144,7 +135,6 @@ LANGUAGES = {
 			"change_lang":"Русский",
 			"switch":"Переключиться на Русский",
 			"help":"Site",
-			"instructions":"Video Instructions",
 
 			"title":"Authorization",
 			"phone":"Phone number",
@@ -158,7 +148,6 @@ LANGUAGES = {
 
 			"reset_settings":"Do you want to reset settings?",
 
-			"check_update_title":"Check updates",
 
 			"files_preview":"Files preview",
 			"files_preview_description":"If disabled, the program does\nnot create thumbnails of files,\nwhich allows to upload them faster",
@@ -168,7 +157,6 @@ LANGUAGES = {
 			"reset":"Reset",
 			"reset_description":"Set default settings",
 			
-			"updated_check":"Check updates with startup",
 		
 			"save":"Save",
 
@@ -187,11 +175,7 @@ LANGUAGES = {
 
 			////////////////////////////////
 
-			"update":"New version is available: ",
-			"curent_ver":"Current version: ",
-			"video_inst":"Video Instruction",
 			"go_to":"Go to GitHub",
-			"change_list":"Change list:",
 
 			"more":"Show more",
 			"less":"Hide",
@@ -213,8 +197,6 @@ LANGUAGES = {
 
 			/////////////
 
-			"update_available":"New update available!",
-			"no_updates":"No updates!",
 
 			"back":"< Back",
 			"sort2":"Sorting",
