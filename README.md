@@ -179,7 +179,7 @@ session, then delete the file locally.
   a `tools/` folder next to `main.py`.
 - **Login loop / weird session state** — `reset_settings.bat`, then `start.bat`.
 - More: **TROUBLESHOOTING.md** (Russian).
-
+- **No one knows how Pasha feels about using his app this way, so it’s better to use a secondary account.**
 ---
 
 ## 📄 Documentation
